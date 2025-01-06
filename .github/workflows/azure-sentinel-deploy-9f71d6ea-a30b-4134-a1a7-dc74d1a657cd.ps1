@@ -503,7 +503,7 @@ function GetParameterFile($path) {
         }
     }
 
-    $defaultParameterFile = $parameterFilePrefix + ".json"
+    $defaultParameterFile = $parameterFilePrefix + ".parameters.json"
     Write-Host "Default parameter file: $defaultParameterFile"
     if (Test-Path $defaultParameterFile) {
         return $defaultParameterFile
