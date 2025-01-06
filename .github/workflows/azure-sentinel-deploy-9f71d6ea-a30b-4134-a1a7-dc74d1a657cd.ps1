@@ -468,6 +468,7 @@ function GetParameterFile($path) {
     }
 
     $extension = [System.IO.Path]::GetExtension($path)
+    Write-Host "Extension: $extension"
     $parameterFilePrefix = if ($extension -eq ".json") {
         $path.TrimEnd(".json")
     } elseif ($extension -eq ".bicep") {
@@ -476,15 +477,19 @@ function GetParameterFile($path) {
         return $null
     }
 
+    Write-Host "Parameter file prefix: $parameterFilePrefix"
+
     # Check for workspace-specific parameter file
     if ($extension -eq ".bicep") {
         $workspaceParameterFile = $parameterFilePrefix + "-$WorkspaceId.bicepparam"
+        Write-Host "Workspace parameter file: $workspaceParameterFile"
         if (Test-Path $workspaceParameterFile) {
             return $workspaceParameterFile
         }
     }
     
     $workspaceParameterFile = $parameterFilePrefix + ".parameters-$WorkspaceId.json"
+    Write-Host "Workspace parameter file: $workspaceParameterFile"
     if (Test-Path $workspaceParameterFile) {
         return $workspaceParameterFile
     }
@@ -492,12 +497,14 @@ function GetParameterFile($path) {
     # Check for parameter file
     if ($extension -eq ".bicep") {
         $defaultParameterFile = $parameterFilePrefix + ".bicepparam"
+        Write-Host "Default parameter file: $defaultParameterFile"
         if (Test-Path $defaultParameterFile) {
             return $defaultParameterFile
         }
     }
 
     $defaultParameterFile = $parameterFilePrefix + ".json"
+    Write-Host "Default parameter file: $defaultParameterFile"
     if (Test-Path $defaultParameterFile) {
         return $defaultParameterFile
     }
