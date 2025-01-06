@@ -470,14 +470,12 @@ function GetParameterFile($path) {
 
     $extension = [System.IO.Path]::GetExtension($path)
     Write-Host "Extension: $extension"
-    Write-Host "Get extension for file $path"
-    $parameterFilePrefix = if ($extension -eq ".json") {
-        $path.TrimEnd(".json")
-    } elseif ($extension -eq ".bicep") {
-        $path.TrimEnd(".bicep")
-    } else {
+    Write-Host "Get extension for file $path" 
+    if ($extension -ne ".json" -and $extension -ne ".bicep") {
         return $null
     }
+
+    $parameterFilePrefix = [System.IO.Path]::GetFileNameWithoutExtension($path)
 
     Write-Host "Parameter file prefix: $parameterFilePrefix"
 
