@@ -497,7 +497,7 @@ function GetParameterFile($path) {
         }
     }
 
-    $defaultParameterFile = $parameterFilePrefix + ".parameters.json"
+    $defaultParameterFile = $parameterFilePrefix + ".json"
     if (Test-Path $defaultParameterFile) {
         return $defaultParameterFile
     }
