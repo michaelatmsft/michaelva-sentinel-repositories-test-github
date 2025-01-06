@@ -469,31 +469,41 @@ function GetParameterFile($path) {
 
     $extension = [System.IO.Path]::GetExtension($path)
     $parameterFilePrefix = if ($extension -eq ".json") {
-        $extension = ".parameters.json"
         $path.TrimEnd(".json")
     } elseif ($extension -eq ".bicep") {
-        $extension = ".bicepparam"
         $path.TrimEnd(".bicep")
     } else {
         return $null
     }
-    
+
     # Check for workspace-specific parameter file
-    if ($extension -eq ".parameters.json") {
-        $workspaceParameterFile = $parameterFilePrefix + ".parameters-$WorkspaceId" + $extension
+    if ($extension -eq ".bicep") {
+        $workspaceParameterFile = $parameterFilePrefix + "-$WorkspaceId.bicepparam"
         if (Test-Path $workspaceParameterFile) {
             return $workspaceParameterFile
         }
     }
+    
+    $workspaceParameterFile = $parameterFilePrefix + ".parameters-$WorkspaceId.json"
+    if (Test-Path $workspaceParameterFile) {
+        return $workspaceParameterFile
+    }
 
-    $defaultParameterFile = $parameterFilePrefix + $extension
+    # Check for parameter file
+    if ($extension -eq ".bicep") {
+        $defaultParameterFile = $parameterFilePrefix + ".bicepparam"
+        if (Test-Path $defaultParameterFile) {
+            return $defaultParameterFile
+        }
+    }
+
+    $defaultParameterFile = $parameterFilePrefix + ".parameters.json"
     if (Test-Path $defaultParameterFile) {
         return $defaultParameterFile
     }
 
     return $null
 }
-
 function Deployment($fullDeploymentFlag, $remoteShaTable, $tree) {
     Write-Host "Starting Deployment for Files in path: $Directory"
     if (Test-Path -Path $Directory) 
