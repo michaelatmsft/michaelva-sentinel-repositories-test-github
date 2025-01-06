@@ -458,6 +458,7 @@ function AbsolutePathWithSlash($relativePath) {
 
 #resolve parameter file name, return $null if there is none.
 function GetParameterFile($path) {
+    Write-Host "Get parameter file for $path"
     $index = RelativePathWithBackslash $path
     $key = ($global:parameterFileMapping.Keys | Where-Object { $_ -eq $index })
     if ($key) {
@@ -469,6 +470,7 @@ function GetParameterFile($path) {
 
     $extension = [System.IO.Path]::GetExtension($path)
     Write-Host "Extension: $extension"
+    Write-Host "Get extension for file $path"
     $parameterFilePrefix = if ($extension -eq ".json") {
         $path.TrimEnd(".json")
     } elseif ($extension -eq ".bicep") {
