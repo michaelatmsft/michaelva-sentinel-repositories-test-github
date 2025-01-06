@@ -475,7 +475,7 @@ function GetParameterFile($path) {
         return $null
     }
 
-    $parameterFilePrefix = [System.IO.Path]::GetFileNameWithoutExtension($path)
+    $parameterFilePrefix = $path.Substring(0, $file.Length - $extension.Length)
 
     Write-Host "Parameter file prefix: $parameterFilePrefix"
 
