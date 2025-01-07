@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.32.4.45862",
+      "templateHash": "6254723456233043568"
+    }
+  },
+  "parameters": {
+    "workspace": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/providers/automationRules",
+      "apiVersion": "2019-01-01-preview",
+      "name": "[format('{0}/Microsoft.SecurityInsights/85f2eac9-43f1-480e-b8ad-663375c195c1', parameters('workspace'))]",
+      "kind": "Scheduled",
+      "properties": {
+        "displayName": "[parameters('displayName')]",
+        "order": 1,
+        "triggeringLogic": {
+          "isEnabled": true,
+          "expirationTimeUtc": null,
+          "triggersOn": "Incidents",
+          "triggersWhen": "Created",
+          "conditions": [
+            {
+              "conditionType": "Property",
+              "conditionProperties": {
+                "propertyName": "IncidentTactics",
+                "operator": "Contains",
+                "propertyValues": [
+                  "Persistence"
+                ]
+              }
+            }
+          ]
+        },
+        "actions": [
+          {
+            "order": 1,
+            "actionType": "ModifyProperties",
+            "actionConfiguration": {
+              "owner": {
+                "objectId": "b18ef471-be11-439d-9279-5ce4e18b976e",
+                "email": "SampleEmail@Contoso.com",
+                "userPrincipalName": "SampleUser@Contoso.com"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
