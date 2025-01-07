@@ -11,9 +11,6 @@
   "parameters": {
     "workspace": {
       "type": "string"
-    },
-    "displayName": {
-      "type": "string"
     }
   },
   "resources": [
@@ -23,7 +20,7 @@
       "name": "[format('{0}/Microsoft.SecurityInsights/85f2eac9-43f1-480e-b8ad-663375c195c1', parameters('workspace'))]",
       "kind": "Scheduled",
       "properties": {
-        "displayName": "[parameters('displayName')]",
+        "displayName": "No param file",
         "order": 1,
         "triggeringLogic": {
           "isEnabled": true,
