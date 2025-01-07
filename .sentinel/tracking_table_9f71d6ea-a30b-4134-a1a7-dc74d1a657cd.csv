@@ -1,4 +1,6 @@
 FileName, CommitSha
+SubDir/SampleAutomationRule.parameters.json,5c79eba5381b1ef88cea745cc1f517c3a4af8e96
 SubDir/SampleAutomationRule-5d0950fb-34c1-4ecb-8eba-fac5e8d75cea.bicepparam,3a1e48a2a7ae314f86d97d8988dec0f1552b403c
 SubDir/SampleAutomationRule.bicep,06e94430e532f8004700bedf58d0e15213312cd1
+SubDir/SampleAutomationRule.json,764c1a630e899eb20291417933041d4940d1aa8d
 
