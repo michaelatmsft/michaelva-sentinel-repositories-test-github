@@ -4,9 +4,6 @@
   "parameters": {
     "workspace": {
       "value": "michaelva-la"
-    },
-    "displayName": {
-      "value": "Sample JSON params with Bicep Automation Rule1"
     }
   }
 }
